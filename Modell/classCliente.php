@@ -6,7 +6,7 @@ class Cliente{
     private $cpf;
     private $endereco;
     private $local;
-
+    
     public function __construct($codCliente=0, $cliente="", $telefone="", $cpf="", $endereco="", $local=""){
         $this->codCliente = $codCliente;
         $this->cliente = $cliente;

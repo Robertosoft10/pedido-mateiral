@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once  '../Api/clienteDao.php';
+require_once  '../Dao/clienteDao.php';
 $clienteDao = new ClienteDAO();
 $clientes = $clienteDao->ListarClientes();
 ?>
@@ -11,7 +11,7 @@ $clientes = $clienteDao->ListarClientes();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Locadora</title>
+    <title>Pedido Material</title>
     <link href="../Bootstrap/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   </head>
@@ -20,9 +20,11 @@ $clientes = $clienteDao->ListarClientes();
     <div class="container">
     <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
      <ul class="nav navbar-nav">
-        <li><a href="#">Clientes</a></li>
-        <li><a href="#">Produtos</a></li>
-        <li><a href="#">Pedidos</a></li>
+       <li><a href="../Dao.logout.php">Sair</a></li>
+        <li><a href="usuarios.php">Usuários</a></li>
+        <li><a href="clientes.php">Clientes</a></li>
+        <li><a href="produtos.php">Produtos</a></li>
+        <li><a href="pedidos.php">Pedidos</a></li>
     </ul>
 </div>
 </div>
@@ -44,6 +46,30 @@ $clientes = $clienteDao->ListarClientes();
           <?php echo $_SESSION ['clientErro'];?>
           </div>
           <?php unset($_SESSION ['clientErro']); } ?>
+
+          <?php if(isset($_SESSION ['clienteDeletado'])){?>
+          <div class="alert alert-success" role="alert">
+          <?php echo $_SESSION ['clienteDeletado'];?>
+          </div>
+          <?php unset($_SESSION ['clienteDeletado']); } ?>
+
+          <?php if(isset($_SESSION ['clienteErroDelete'])){?>
+          <div class="alert alert-danger" role="alert">
+          <?php echo $_SESSION ['clienteErroDelete'];?>
+          </div>
+          <?php unset($_SESSION ['clienteErroDelete']); } ?>
+
+          <?php if(isset($_SESSION ['clientAtualiza'])){?>
+          <div class="alert alert-success" role="alert">
+          <?php echo $_SESSION ['clientAtualiza'];?>
+          </div>
+          <?php unset($_SESSION ['clientAtualiza']); } ?>
+
+          <?php if(isset($_SESSION ['clientErroAtualiza'])){?>
+          <div class="alert alert-danger" role="alert">
+          <?php echo $_SESSION ['clientErroAtualiza'];?>
+          </div>
+          <?php unset($_SESSION ['clientErroAtualiza']); } ?>
             <form action="../Controller/incluirCliente.php" method="post">
                 <fieldset>
                     <legend>Novo Cliente</legend>
@@ -68,7 +94,7 @@ $clientes = $clienteDao->ListarClientes();
                       <textarea type="text" class="form-control" id="local" name="local"></textarea>
                     </div>
                     <div class="form-group col-lg-12 col-xs-12">
-                    <button type="submit" class="btn btn-primary col-xs-2">Salvar</button>
+                    <button type="submit" class="btn btn-success col-xs-2">Salvar</button>
                     <div>
                 </fieldset>
             </form>
@@ -77,7 +103,7 @@ $clientes = $clienteDao->ListarClientes();
          	<br /> <br />
         </div>
             <div class="container">
-            <div class="panel panel-default">
+            <div class="panel panel-primary">
             <div class="panel-heading">
             <h2 class="panel-title">Lista de Clientes</h2>
             </div>
@@ -95,7 +121,7 @@ $clientes = $clienteDao->ListarClientes();
                     <td class="col-md-3"><?php echo $cliente->cliente;?></td>
                     <td class="col-md-3"><?php echo $cliente->telefone;?></td>
                     <td class="col-md-1">
-                    <a class="btn btn-primary" href="detalheClinte.php?codCliente=<?= $cliente->codCliente;?>" role="button">Detalhe</a>
+                    <a class="btn btn-primary" href="detalheCliente.php?codCliente=<?= $cliente->codCliente;?>" role="button">Detalhe</a>
                     </td>
                 </tr>
               <?php } ?>
