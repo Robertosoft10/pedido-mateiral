@@ -73,7 +73,7 @@ if(@count($_SESSION['produtoSession']) == 0){
 foreach($_SESSION['clienteSession'] as $codCliente => $qtdCliente){
 foreach($_SESSION['produtoSession'] as $codProduto => $qtdProduto){
 
-  $sql = "INSERT INTO pedidos(codCliente, codProduto, qtdProduto, somaValor)
+  $sql = "INSERT INTO pedidos(cliente_cod, produto_cod, qtdProduto, somaValor)
 VALUES(:codCliente, :codProduto, :qtdProduto, :somaValor)";
    $cadastro = $conexao->prepare($sql);
    $cadastro->bindParam(':codCliente', $codCliente);

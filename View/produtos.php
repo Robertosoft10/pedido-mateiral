@@ -74,15 +74,15 @@ $produtos = $produtoDao->ListarProdutos();
             <form action="../Controller/incluirProduto.php" method="post">
                 <fieldset>
                     <legend>Novo Produto</legend>
-                        <div class="form-group col-lg-12 col-xs-12">
+                        <div class="form-group col-lg-5 col-xs-5">
                           Produto: *
                         <input type="text" class="form-control" id="produto" name="produto">
                         </div>
-                        <div class="form-group col-lg-12 col-xs-12">
+                        <div class="form-group col-lg-4 col-xs-4">
                           Código:
                         <input type="number" class="form-control" id="codigo" name="codigo">
                         </div>
-                        <div class="form-group col-lg-12 col-xs-12">
+                        <div class="form-group col-lg-3 col-xs-3">
                           Preço: *
                         <input type="text" class="form-control" id="preco" name="preco">
                         </div>

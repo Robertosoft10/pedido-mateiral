@@ -1,8 +1,8 @@
 <?php
 session_start();
 require_once  '../Dao/conexao.php';
-$sql = $conexao->query("SELECT * FROM pedidos PD JOIN clientes CL ON PD.codCliente = CL.codCliente");
-
+$sql = $conexao->query("SELECT * FROM pedidos PD JOIN clientes CL ON PD.cliente_cod = CL.codCliente
+GROUP BY cliente_cod");
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -48,29 +48,17 @@ $sql = $conexao->query("SELECT * FROM pedidos PD JOIN clientes CL ON PD.codClien
           </div>
           <?php unset($_SESSION ['pedidoErro']); } ?>
 
-          <?php if(isset($_SESSION ['produtAtualizado'])){?>
+          <?php if(isset($_SESSION ['pedidoDeletado'])){?>
           <div class="alert alert-success" role="alert">
-          <?php echo $_SESSION ['produtAtualizado'];?>
+          <?php echo $_SESSION ['pedidoDeletado'];?>
           </div>
-          <?php unset($_SESSION ['produtAtualizado']); } ?>
+          <?php unset($_SESSION ['pedidoDeletado']); } ?>
 
-          <?php if(isset($_SESSION ['produtErroAtualiza'])){?>
+          <?php if(isset($_SESSION ['pedidoErroDelete'])){?>
           <div class="alert alert-danger" role="alert">
-          <?php echo $_SESSION ['produtErroAtualiza'];?>
+          <?php echo $_SESSION ['pedidoErroDelete'];?>
           </div>
-          <?php unset($_SESSION ['produtErroAtualiza']); } ?>
-
-          <?php if(isset($_SESSION ['produtoDeletado'])){?>
-          <div class="alert alert-success" role="alert">
-          <?php echo $_SESSION ['produtoDeletado'];?>
-          </div>
-          <?php unset($_SESSION ['produtoDeletado']); } ?>
-
-          <?php if(isset($_SESSION ['produtoErroDelete'])){?>
-          <div class="alert alert-danger" role="alert">
-          <?php echo $_SESSION ['produtoErroDelete'];?>
-          </div>
-          <?php unset($_SESSION ['produtoErroDelete']); } ?>
+          <?php unset($_SESSION ['pedidoErroDelete']); } ?>
           <a href="novoPedido.php">
           <button type="submit" class="btn btn-success col-xs-2">Novo Pedido</button></a>
         </div>
@@ -88,17 +76,15 @@ $sql = $conexao->query("SELECT * FROM pedidos PD JOIN clientes CL ON PD.codClien
                 <tr>
                     <th>Cliente</th>
                     <th>Valor</th>
-                     <th></th>
                     <th></th>
                 </tr>
               <?php while($pedido = $sql->fetch(PDO:: FETCH_OBJ)){ ?>
                 <tr>
                     <td class="col-md-3"><?php echo $pedido->cliente;?></td>
-                    <td class="col-md-3"><?php echo $pedido->somaValor;?></td>
-                    <td class="col-md-2"></td>
+                    <td class="col-md-3">R$ <?php echo number_format($pedido->somaValor, 2, ',', ',')?></td>
                     <td class="col-md-3">
-                    <a class="btn btn-primary" href="detalheProduto.php?codProduto=<?= $pedido->codProduto;?>" role="button">Detalhe</a>
-                    <a class="btn btn-info" href="detalheProduto.php?codProduto=<?= $pedido->codProduto;?>" role="button">Adicionar</a>
+                    <a class="btn btn-primary" href="detalhePedido.php?cliente_cod=<?= $pedido->cliente_cod;?>" role="button">Detalhe</a>
+                    <a class="btn btn-info" href="detalheProduto.php?cliente_cod=<?= $pedido->cliente_cod;?>" role="button">Adicionar</a>
                     </td>
                 </tr>
               <?php } ?>

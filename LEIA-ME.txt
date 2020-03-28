@@ -1,0 +1,6 @@
+para acessar o sistema pela primeira vez,
+acesse o endereco: 127.0.0.1/pedido-material/config.php
+Após acessae este endereço, basta entrar no sistema como endereço abaixo.
+
+E-mail: admin@gmail.com
+senha: 12345
