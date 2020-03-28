@@ -20,7 +20,8 @@ $clientes = $clienteDao->ListarClientes();
     <div class="container">
     <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
      <ul class="nav navbar-nav">
-       <li><a href="../Dao.logout.php">Sair</a></li>
+       <li><a href="">Bem Vindo: <?php echo $_SESSION['usuario'];?></a></li>
+    <li><a href="../Dao/logout.php">Sair</a></li>
         <li><a href="usuarios.php">Usuários</a></li>
         <li><a href="clientes.php">Clientes</a></li>
         <li><a href="produtos.php">Produtos</a></li>
@@ -90,8 +91,8 @@ $clientes = $clienteDao->ListarClientes();
                         <input type="text" class="form-control" id="endereco" name="endereco">
                          </div>
                          <div class="form-group col-lg-12 col-xs-12">
-                        Local da entrega: *
-                      <textarea type="text" class="form-control" id="local" name="local"></textarea>
+                        Descrição: 
+                      <textarea type="text" class="form-control" id="local" name="descricao"></textarea>
                     </div>
                     <div class="form-group col-lg-12 col-xs-12">
                     <button type="submit" class="btn btn-success col-xs-2">Salvar</button>

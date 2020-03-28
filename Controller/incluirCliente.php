@@ -2,14 +2,14 @@
 session_start();
 include_once '../Dao/clienteDao.php';
 
-if(!empty($_POST['cliente']) && !empty($_POST['telefone']) && !empty($_POST['endereco']) && !empty($_POST['local'])){
+if(!empty($_POST['cliente']) && !empty($_POST['telefone']) && !empty($_POST['endereco']) && !empty($_POST['descricao'])){
 
 $objetoCliente = new Cliente();
 $objetoCliente->setCliente($_POST['cliente']);
 $objetoCliente->setTelefone($_POST['telefone']);
 $objetoCliente->setCpf($_POST['cpf']);
 $objetoCliente->setEndereco($_POST['endereco']);
-$objetoCliente->setLocal($_POST['local']);
+$objetoCliente->setDescricao($_POST['descricao']);
 
 $clienteDAO = new ClienteDAO();
 $clienteDAO->CadastrarCliente($objetoCliente);

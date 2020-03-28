@@ -9,7 +9,7 @@ class ClienteDAO{
 	}
     public function CadastrarCliente($cliente) {
 
-    $sql = "INSERT INTO clientes (codCliente, cliente,  telefone, cpf, endereco, local) VALUES (null, ?, ?, ?, ?, ?) ";
+    $sql = "INSERT INTO clientes (codCliente, cliente,  telefone, cpf, endereco, descricao) VALUES (null, ?, ?, ?, ?, ?) ";
 		try {
 
 			$objeto = $this->executar->prepare($sql);
@@ -17,7 +17,7 @@ class ClienteDAO{
 			$objeto->bindValue(2, $cliente->getTelefone(), PDO::PARAM_STR);
 			$objeto->bindValue(3, $cliente->getCpf(), PDO::PARAM_STR);
 		  $objeto->bindValue(4, $cliente->getEndereco(), PDO::PARAM_STR);
-		  $objeto->bindValue(5, $cliente->getLocal(), PDO::PARAM_STR);
+		  $objeto->bindValue(5, $cliente->getDescricao(), PDO::PARAM_STR);
 
 			$objeto->execute();
 			$this->executar = NULL;
@@ -50,14 +50,14 @@ class ClienteDAO{
 }
 
     public function AtualizarCliente($cliente) {
-    $sql = "UPDATE clientes SET  cliente= ?, telefone= ?, cpf= ?, endereco=?, local= ? WHERE codCliente = ?";
+    $sql = "UPDATE clientes SET  cliente= ?, telefone= ?, cpf= ?, endereco=?, descricao= ? WHERE codCliente = ?";
 		try {
 			$objeto = $this->executar->prepare($sql);
 			$objeto->bindValue(1, $cliente->getCliente(), PDO::PARAM_STR);
 			$objeto->bindValue(2, $cliente->getTelefone(), PDO::PARAM_STR);
 			$objeto->bindValue(3, $cliente->getCpf(), PDO::PARAM_STR);
 		  $objeto->bindValue(4, $cliente->getEndereco(), PDO::PARAM_STR);
-		  $objeto->bindValue(5, $cliente->getLocal(), PDO::PARAM_STR);
+		  $objeto->bindValue(5, $cliente->getDescricao(), PDO::PARAM_STR);
       $objeto->bindValue(6, $cliente->getCodCliente(), PDO::PARAM_INT);
 
 			$objeto->execute();

@@ -10,7 +10,7 @@ $objetoCliente->setCliente($_POST['cliente']);
 $objetoCliente->setTelefone($_POST['telefone']);
 $objetoCliente->setCpf($_POST['cpf']);
 $objetoCliente->setEndereco($_POST['endereco']);
-$objetoCliente->setLocal($_POST['local']);
+$objetoCliente->setDescricao($_POST['descricao']);
 
 $clienteDAO = new ClienteDAO();
 $clienteDAO->AtualizarCliente($objetoCliente);

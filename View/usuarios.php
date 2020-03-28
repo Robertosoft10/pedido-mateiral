@@ -20,7 +20,8 @@ $usuarios = $usuarioDao->ListarUsuarios();
     <div class="container">
     <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
      <ul class="nav navbar-nav">
-       <li><a href="../Dao.logout.php">Sair</a></li>
+       <li><a href="">Bem Vindo: <?php echo $_SESSION['usuario'];?></a></li>
+       <li><a href="../Dao/logout.php">Sair</a></li>
         <li><a href="usuarios.php">Usuários</a></li>
         <li><a href="clientes.php">Clientes</a></li>
         <li><a href="produtos.php">Produtos</a></li>

@@ -5,15 +5,15 @@ class Cliente{
     private $telefone;
     private $cpf;
     private $endereco;
-    private $local;
-    
-    public function __construct($codCliente=0, $cliente="", $telefone="", $cpf="", $endereco="", $local=""){
+    private $descricao;
+
+    public function __construct($codCliente=0, $cliente="", $telefone="", $cpf="", $endereco="", $descricao=""){
         $this->codCliente = $codCliente;
         $this->cliente = $cliente;
         $this->telefone = $telefone;
         $this->cpf = $cpf;
         $this->endereco = $endereco;
-        $this->local = $local;
+        $this->descricao = $descricao;
     }
     public function getCodCliente(){
         return $this->codCliente;
@@ -45,11 +45,11 @@ class Cliente{
     public function setEndereco($endereco){
         $this->endereco = $endereco;
     }
-    public function getLocal(){
-        return $this->local;
+    public function getDescricao(){
+        return $this->descricao;
     }
-    public function setLocal($local){
-        $this->local = $local;
+    public function setDescricao($descricao){
+        $this->descricao = $descricao;
     }
 }
 ?>

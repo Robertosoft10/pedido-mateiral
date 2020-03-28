@@ -22,7 +22,8 @@ $cliente = $listarCliente->fetch(PDO::FETCH_OBJ);
     <div class="container">
     <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
      <ul class="nav navbar-nav">
-       <li><a href="../Dao.logout.php">Sair</a></li>
+       <li><a href="">Bem Vindo: <?php echo $_SESSION['usuario'];?></a></li>
+      <li><a href="../Dao/logout.php">Sair</a></li>
         <li><a href="usuarios.php">Usuários</a></li>
         <li><a href="clientes.php">Clientes</a></li>
         <li><a href="produtos.php">Produtos</a></li>
@@ -61,9 +62,9 @@ $cliente = $listarCliente->fetch(PDO::FETCH_OBJ);
                         value="<?php echo $cliente->endereco;?>">
                          </div>
                          <div class="form-group col-lg-12 col-xs-12">
-                        Local da entrega:
-                      <textarea type="text" class="form-control" id="local" name="local">
-                      <?php echo $cliente->local;?></textarea>
+                        Descrição:
+                      <textarea type="text" class="form-control" id="local" name="descricao">
+                      <?php echo $cliente->descricao;?></textarea>
                     </div>
                     <div class="form-group col-lg-12 col-xs-12">
                     <button type="submit" class="btn btn-success col-xs-2">Salvar Alterações</button>

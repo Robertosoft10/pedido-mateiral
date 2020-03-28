@@ -58,6 +58,7 @@ if(isset($_GET['deleteC'])){
           unset($_SESSION['produtoSession']);
       }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -71,12 +72,12 @@ if(isset($_GET['deleteC'])){
 
   </head>
 <body>
-
 <nav class="navbar navbar-fixed-top navbar-inverse">
     <div class="container">
     <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
      <ul class="nav navbar-nav">
-       <li><a href="../Dao.logout.php">Sair</a></li>
+       <li><a href="">Bem Vindo: <?php echo $_SESSION['usuario'];?></a></li>
+       <li><a href="../Dao/logout.php">Sair</a></li>
         <li><a href="usuarios.php">Usuários</a></li>
         <li><a href="clientes.php">Clientes</a></li>
         <li><a href="produtos.php">Produtos</a></li>
@@ -163,39 +164,17 @@ if(isset($_GET['deleteC'])){
                   </td>
                 </form>
                  <td>
-                   <form action="" method="post">
-                <button  class="btn btn-success" name="fimPedido">Finalizar Pedido</button>
+                   <form action="../Controller/incluirPedido.php" method="post">
+                <button  class="btn btn-success">Finalizar Pedido</button>
               </form>
                  </td>
                  <td>
                 <form  action="?acao=cancelarP" method="post">
-                <button  class="btn btn-danger" name="fimPedido">Lampar Pedido</button>
+                <button  class="btn btn-danger">Lampar Pedido</button>
               </form>
                  </td>
                  </tr>
                 </table>
-                <?php
-                if(isset($_POST['fimPedido'])){
-                  foreach($_SESSION['clienteSession'] as $codCliente => $qtdCliente){
-                  foreach($_SESSION['produtoSession'] as $codProduto => $qtdProduto){
-
-                    $sql = "INSERT INTO pedidos(codCliente, codProduto, qtdProduto, somaValor)
-                  VALUES(:codCliente, :codProduto, :qtdProduto, :somaValor)";
-                     $cadastro = $conexao->prepare($sql);
-                     $cadastro->bindParam(':codCliente', $codCliente);
-                     $cadastro->bindParam(':codProduto', $codProduto);
-                     $cadastro->bindParam(':qtdProduto', $qtdProduto);
-                     $cadastro->bindParam(':somaValor', $somaValor);
-                     $cadastro->execute();
-
-                    }
-                  }
-                }
-                if(isset($cadastro) == true){
-                  $_SESSION ['pedidoRealizado'] = "Pedido realizado com sucesso!";
-                  header('location: ../View/pedidos.php');
-                }
-                 ?>
 </div>
 </div>
 </div>

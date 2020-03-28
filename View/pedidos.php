@@ -1,8 +1,8 @@
 <?php
 session_start();
-require_once  '../Dao/produtoDao.php';
-$produtoDao = new ProdutoDAO();
-$produtos = $produtoDao->ListarProdutos();
+require_once  '../Dao/conexao.php';
+$sql = $conexao->query("SELECT * FROM pedidos PD JOIN clientes CL ON PD.codCliente = CL.codCliente");
+
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,7 +20,8 @@ $produtos = $produtoDao->ListarProdutos();
     <div class="container">
     <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px;">
      <ul class="nav navbar-nav">
-       <li><a href="../Dao.logout.php">Sair</a></li>
+       <li><a href="">Bem Vindo: <?php echo $_SESSION['usuario'];?></a></li>
+      <li><a href="../Dao/logout.php">Sair</a></li>
         <li><a href="usuarios.php">Usuários</a></li>
         <li><a href="clientes.php">Clientes</a></li>
         <li><a href="produtos.php">Produtos</a></li>
@@ -35,17 +36,17 @@ $produtos = $produtoDao->ListarProdutos();
 </div>
 </div>
         <div class="container">
-          <?php if(isset($_SESSION ['pedidoRealizado'])){?>
+          <?php if(isset($_SESSION ['pedidoSalvo'])){?>
           <div class="alert alert-success" role="alert">
-          <?php echo $_SESSION ['pedidoRealizado'];?>
+          <?php echo $_SESSION ['pedidoSalvo'];?>
           </div>
-          <?php unset($_SESSION ['pedidoRealizado']); } ?>
+          <?php unset($_SESSION ['pedidoSalvo']); } ?>
 
-          <?php if(isset($_SESSION ['produtErro'])){?>
+          <?php if(isset($_SESSION ['pedidoErro'])){?>
           <div class="alert alert-danger" role="alert">
-          <?php echo $_SESSION ['produtErro'];?>
+          <?php echo $_SESSION ['pedidoErro'];?>
           </div>
-          <?php unset($_SESSION ['produtErro']); } ?>
+          <?php unset($_SESSION ['pedidoErro']); } ?>
 
           <?php if(isset($_SESSION ['produtAtualizado'])){?>
           <div class="alert alert-success" role="alert">
@@ -85,19 +86,19 @@ $produtos = $produtoDao->ListarProdutos();
             <div class="panel-body">
                 <table class="table table-hover " id="dataTables-example">
                 <tr>
-                    <th>ID</th>
-                    <th>Produto</th>
-                     <th>Preço</th>
+                    <th>Cliente</th>
+                    <th>Valor</th>
+                     <th></th>
                     <th></th>
                 </tr>
-              <?php while($produto = $produtos->fetch(PDO:: FETCH_OBJ)){ ?>
+              <?php while($pedido = $sql->fetch(PDO:: FETCH_OBJ)){ ?>
                 <tr>
-                    <td class="col-md-1"><?php echo $produto->codProduto;?></td>
-                    <td class="col-md-3"><?php echo $produto->produto;?></td>
-                    <td class="col-md-3"><?php echo $produto->preco;?></td>
-                    <td class="col-md-2">
-                    <a class="btn btn-primary" href="detalheProduto.php?codProduto=<?= $produto->codProduto;?>" role="button">Detalhe</a>
-                    <a class="btn btn-info" href="detalheProduto.php?codProduto=<?= $produto->codProduto;?>" role="button">Adicionar</a>
+                    <td class="col-md-3"><?php echo $pedido->cliente;?></td>
+                    <td class="col-md-3"><?php echo $pedido->somaValor;?></td>
+                    <td class="col-md-2"></td>
+                    <td class="col-md-3">
+                    <a class="btn btn-primary" href="detalheProduto.php?codProduto=<?= $pedido->codProduto;?>" role="button">Detalhe</a>
+                    <a class="btn btn-info" href="detalheProduto.php?codProduto=<?= $pedido->codProduto;?>" role="button">Adicionar</a>
                     </td>
                 </tr>
               <?php } ?>
